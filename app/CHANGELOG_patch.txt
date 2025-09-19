@@ -1,0 +1,19 @@
+Pintando a Palavra – Patch 2K Export v1.0 (2025-08-30)
+
+✓ Exportar PNG atualizado: 2560 × 1440 (2K, 16:9) com preservação de proporção (sem distorção).
+✓ Supersampling 3× + imageSmoothingEnabled=true + imageSmoothingQuality="high" para bordas lisas.
+✓ Clone de SVG antes de exportar com viewBox garantido e width/height consistentes (100%/auto).
+✓ Fundo branco no PNG, áreas pretas preservadas (sem falhas).
+✓ Som mantido ao clicar nas ferramentas e navegação (prev/next com feedback sonoro).
+✓ Navegação prev/next robusta (listeners com checagem).
+✓ Exporta somente PNG; impressão inline mantida.
+
+Arquivos tocados:
+- js/script.js (savePNG reescrito; som nos botões; pequenas garantias de robustez)
+- (demais arquivos preservados)
+
+Como testar (VS Code/Chrome):
+1) Abrir index.html localmente.
+2) Testar navegação ◀ ▶ e pintura normalmente.
+3) "Salvar PNG": validar arquivo 2560x1440 com contornos nítidos.
+4) "Imprimir": visualizar em A4.
