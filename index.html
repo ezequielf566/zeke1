@@ -1,191 +1,583 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pintando a Palavra — Menu</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Fredoka", sans-serif;
-      background: #fff9e6; /* amarelo suave */
-      color: #000; /* preto puro */
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advocacia Tributária Especializada - Soluções jurídicas estratégicas e preventivas.">
+    <title>Advocacia Tributária Especializada | Estratégia e Segurança Jurídica</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-    header {
-      background: #ffd54f; /* amarelo mais forte */
-      padding: 1rem;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+    <style>
+        /* ========================================
+        VARIAVEIS E RESET
+        ========================================
+        */
+        :root {
+            --primary: #0a192f;
+            --primary-light: #112240;
+            --accent: #c19b67; /* Destaque sutil em bronze/ouro para elegância */
+            --text-dark: #333333;
+            --text-light: #f8f9fa;
+            --gray: #64748b;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
 
-    header button {
-      background: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s;
-      color: #000;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header button:hover {
-      background: #f1f1f1;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #000; /* preto puro */
-    }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
 
-    h2 {
-      margin-top: 2rem;
-      font-size: 1.3rem;
-      color: #000;
-    }
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        img { max-width: 100%; display: block; }
 
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      width: 100%;
-      max-width: 320px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .menu button {
-      background: #ffe082;
-      border: none;
-      padding: 1rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.2s, background 0.2s;
-      width: 100%;
-      color: #000;
-    }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border: none;
+            transition: var(--transition);
+        }
 
-    .menu button:hover {
-      background: #ffd54f;
-      transform: scale(1.02);
-    }
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
 
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
 
-    .socials button {
-      background: #fff59d;
-      border: none;
-      padding: 0.8rem 1.2rem;
-      border-radius: 12px;
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.2s, background 0.2s;
-      min-width: 120px;
-      color: #000;
-    }
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
 
-    .socials button:hover {
-      background: #ffe082;
-      transform: scale(1.03);
-    }
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
 
-    /* Responsividade */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-      .menu {
-        max-width: 90%;
-      }
-      .socials {
-        flex-direction: column;
-        align-items: center;
-      }
-      .socials button {
-        width: 100%;
-        max-width: 200px;
-      }
-    }
-  </style>
+        /* ========================================
+        HEADER
+        ========================================
+        */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        /* ========================================
+        HERO SECTION
+        ========================================
+        */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), 
+                        url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        /* ========================================
+        SERVIÇOS (CARDS)
+        ========================================
+        */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            background: var(--white);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-bottom: 3px solid var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+
+        .icon-box {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        /* ========================================
+        DIFERENCIAIS
+        ========================================
+        */
+        .diferenciais {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .diferenciais-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .diff-item h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .diff-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ========================================
+        AUTORIDADE / CONTEÚDO
+        ========================================
+        */
+        .authority-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .authority-img {
+            border-left: 10px solid var(--bg-light);
+            padding-left: 20px;
+        }
+
+        .authority-content h2 {
+            margin-bottom: 25px;
+        }
+
+        .authority-content p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        /* ========================================
+        CONTATO CTA
+        ========================================
+        */
+        .contact-cta {
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+        FOOTER
+        ========================================
+        */
+        footer {
+            background: var(--white);
+            padding: 60px 0 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* ========================================
+        ANIMATIONS & RESPONSIVIDADE
+        ========================================
+        */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 992px) {
+            .authority-section {
+                grid-template-columns: 1fr;
+            }
+            .authority-img {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplificado para o exemplo, em produção usaria menu lateral */
+            }
+            .mobile-toggle {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id='menuContainer'>
-  <header>
-    <button onclick="logout()">Sair da Conta</button>
-  </header>
 
-  <main>
-    <h1>Seja bem-vindo ao<br>Pintando a Palavra</h1>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    ADVOCACIA TRIBUTÁRIA
+                    <span>Especializada</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#atuacao">Atuação</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="https://wa.me/559284899786" target="_blank" class="btn btn-outline">Fale com um Especialista</a></li>
+                </ul>
+                <div class="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <div class="menu">
-      <button onclick="abrirApp()">Histórias</button>
-      <button onclick="window.open('https://drive.google.com/drive/folders/16yViJ5Ft9wIsLNxzTzNsygpvoBTYxnrT?usp=drive_link', '_blank')">
-        Atividades
-      </button>
-      <button onclick="window.open('https://drive.google.com/drive/folders/1MFnUpkdOk7yVpup7IRr1oHnJWdahEWUB?usp=drive_link', '_blank')">
-        PDF Completo
-      </button>
-    </div>
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Estratégia Tributária com Segurança Jurídica</h1>
+                    <p>Orientação técnica e defesa especializada para otimizar a carga tributária do seu negócio com total conformidade legal.</p>
+                    <a href="https://wa.me/559284899786" target="_blank" class="btn btn-primary" style="background-color: #25d366; border-color: #25d366;">
+                        Falar no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <h2>Siga-nos nas redes sociais</h2>
-    <div class="socials">
-      <button onclick="window.open('https://www.instagram.com/pintandoapalavra_?igsh=MTBzdjdnc2k3OG4yaQ==', '_blank')">
-        Instagram
-      </button>
-      <button onclick="window.open('https://www.facebook.com/share/1CYaATKtFQ/', '_blank')">
-        Facebook
-      </button>
-    </div>
-  </main>
+        <section id="servicos" class="section-padding reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Serviços Tributários</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon-box">⚖️</div>
+                        <h3>Consultoria Tributária</h3>
+                        <p>Análise técnica detalhada da legislação vigente para garantir a conformidade fiscal e identificar oportunidades legais de economia.</p>
+                    </div>
 
-  <script>
-    function logout() {
-      alert("Saindo da conta...");
-      // aqui futuramente você pode redirecionar para tela de login
-    }
-  </script>
-</div>
+                    <div class="service-card">
+                        <div class="icon-box">📊</div>
+                        <h3>Planejamento Tributário</h3>
+                        <p>Estruturação de operações e modelos de negócio visando a redução legítima de encargos, respeitando os limites da elisão fiscal.</p>
+                    </div>
 
-<script>
-function abrirApp() {
-  document.getElementById("menuContainer").style.display = "none";
-  const iframe = document.getElementById("conteudo");
-  iframe.style.display = "block";
-  iframe.src = "app/index.html"; // mantém app intacto
-  history.pushState({tela: "app"}, "", "#app");
-}
-window.onpopstate = function(event) {
-  if (!event.state || event.state.tela !== "app") {
-    document.getElementById("conteudo").style.display = "none";
-    document.getElementById("menuContainer").style.display = "block";
-  }
-};
-</script>
-<iframe id="conteudo" style="display:none;width:100%;height:100vh;border:none;"></iframe>
+                    <div class="service-card">
+                        <div class="icon-box">🏛️</div>
+                        <h3>Contencioso Tributário</h3>
+                        <p>Representação técnica em processos administrativos e judiciais, com foco na defesa de direitos e contestação de cobranças indevidas.</p>
+                    </div>
 
+                    <div class="service-card">
+                        <div class="icon-box">🤝</div>
+                        <h3>Transação Tributária</h3>
+                        <p>Orientação e intermediação em acordos com a União e Estados para regularização de débitos e negociação de benefícios fiscais.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-box">📜</div>
+                        <h3>Reforma Tributária</h3>
+                        <p>Acompanhamento estratégico e análise de impactos das novas legislações no modelo de negócios da sua empresa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="atuacao" class="section-padding diferenciais reveal">
+            <div class="container">
+                <div class="diferenciais-grid">
+                    <div class="diff-item">
+                        <h4>Atuação Estratégica</h4>
+                        <p>Olhar focado em resultados sustentáveis a longo prazo.</p>
+                    </div>
+                    <div class="diff-item">
+                        <h4>Foco Preventivo</h4>
+                        <p>Antecipação de riscos para evitar litígios desnecessários.</p>
+                    </div>
+                    <div class="diff-item">
+                        <h4>Segurança Jurídica</h4>
+                        <p>Fundamentação técnica rigorosa em todas as etapas.</p>
+                    </div>
+                    <div class="diff-item">
+                        <h4>Atendimento Personalizado</h4>
+                        <p>Soluções desenhadas sob medida para cada cliente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding reveal">
+            <div class="container">
+                <div class="authority-section">
+                    <div class="authority-img">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800" alt="Ambiente Jurídico">
+                    </div>
+                    <div class="authority-content">
+                        <h2>Excelência Técnica na Gestão de Passivos e Ativos Fiscais</h2>
+                        <p>A complexidade do sistema tributário nacional exige uma atuação que vá além do acompanhamento processual. É fundamental entender a dinâmica econômica do cliente para oferecer soluções que garantam a saúde financeira do negócio.</p>
+                        <p>Nossa atuação é pautada pelo rigor ético e pela busca incessante pela segurança jurídica, fornecendo subsídios para que o empresário possa focar no crescimento da sua atividade principal.</p>
+                        <a href="#contato" class="btn btn-outline">Saiba mais sobre nossa visão</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section-padding contact-cta reveal">
+            <div class="container">
+                <div class="contact-container">
+                    <h2 class="font-serif" style="font-size: 2.2rem; margin-bottom: 20px;">Análise Técnica Inicial</h2>
+                    <p style="margin-bottom: 40px; color: var(--gray);">Agende uma conversa com nossos especialistas para uma avaliação preliminar do cenário tributário da sua empresa.</p>
+                    <a href="https://wa.me/559284899786" target="_blank" class="btn btn-primary" style="padding: 20px 50px; font-size: 1rem;">
+                        Iniciar Conversa via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    ADVOCACIA TRIBUTÁRIA
+                    <span>Especializada</span>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--gray);">
+                    Manaus, AM | Atendimento Nacional
+                </div>
+            </div>
+            <div class="disclaimer">
+                <p>&copy; <span id="year"></span> Advocacia Tributária Especializada. Todos os direitos reservados.</p>
+                <p>Conteúdo estritamente informativo. O atendimento jurídico depende da análise individualizada de cada caso. Em conformidade com o Código de Ética e Disciplina da OAB.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data Atual Automática
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Efeito de Revelação ao Rolar (Scroll Reveal)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        // Disparar uma vez ao carregar para itens já visíveis
+        window.addEventListener("load", reveal);
+
+        // Header Dinâmico (Sombra ao rolar)
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
 </body>
 </html>
